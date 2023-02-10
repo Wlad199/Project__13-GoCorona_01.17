@@ -1,0 +1,203 @@
+// Burger (**==MW==**) ====================================================================================================//
+
+// Запрещаем скролл основного контента при открытом бургере
+body._lock {
+	overflow: hidden;
+}
+// Прячем бургер на больших экранах
+.menu__icon {
+	display: none;
+}
+
+@media (max-width: $mobile) {
+	.menu__icon {
+		margin: 0px 30px 0px 0px;
+		@media (max-width: 450px) {
+			margin: 0;
+		}
+		display: block;
+		position: relative;
+		width: rem(30);
+		height: rem(18);
+		cursor: pointer;
+		z-index: 5;
+	// Три полоски
+		span,
+		&::before,
+		&::after {
+			content: "";
+			transition: all 0.3s ease 0s;
+			right: 0;
+			position: absolute;
+			width: 100%;
+			height: rem(2); //10%
+			background-color: #EC5863;
+		}
+		&::before {
+			top: 0;
+		}
+		&::after {
+			bottom: 0;
+		}
+		span {
+			top: calc(50% - rem(1)); //transform: scale(1) translate(0px -50%);
+		}
+	}
+
+	.menu__icon._active {
+		margin: 0px 30px 0px 0px;
+		@media (max-width: 450px) {
+			margin: 0;
+		}
+		span {
+			width: 0;
+		}
+		&::before,
+		&::after {
+		}
+		&::before {
+			top: calc(50% - rem(1));
+			transform: rotate(-45deg);
+		}
+		&::after {
+			bottom: calc(50% - rem(1));
+			transform: rotate(45deg);
+		}
+	}
+
+	.menu__body {
+		position: fixed;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.9);
+		padding: 100px 30px 30px 30px;
+		transition: left 0.3s ease 0s;
+		overflow: auto; // Добавляем скролл
+
+		// Рисуем шапку
+		&::before {
+			content: '';
+			position: fixed;
+			width: 100%;
+			top: 0;
+			left: 0;
+			height: 114px; // Высота шапки
+			//background-color: #FAFBFD;
+			z-index: 2;
+		}
+	}
+
+	// Выезд меню-бургера при нажатии на бургер
+	.menu__body._active {
+		left: 0;
+	}
+}
+// button ====================================================================================================//
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 130px;
+	height: 40px;
+	border-radius: 5px;
+	font-family: 'Raleway';
+	font-weight: 800;
+	font-size: 10px;
+	line-height: 120%; /* 12/10 */
+	letter-spacing: 0.14em;
+	color: #FCFDFE;
+	z-index: 2;
+	background-color: #EC5863;
+	transition: all 0.3s ease 0s ;
+	&:hover {
+		background-color: #b71521;
+	}
+
+	&_blue {
+		background-color: #4285F4;
+		transition: all 0.3s ease 0s ;
+		&:hover {
+			background-color: #0c57d6;
+		}
+	}
+}
+
+// header ====================================================================================================//
+
+.header {
+	position: absolute;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 50;
+
+	&__container {
+		min-height: 114px;
+		display: flex;
+		align-items: center;
+		@media (max-width: 767px) {
+			min-height: 80px;
+		}
+	}
+
+	&__logo {
+		z-index: 5;
+		@media (max-width: 767px) {
+			flex: 0 0 40px;
+			overflow: hidden;
+		}
+	}
+
+	&__button {
+		display: flex;
+		flex: 0 0 252px;
+		justify-content: flex-end;
+		@media (max-width: 767px) {
+			justify-content: center;
+			flex: 0 1 auto;
+			margin: 0px 50px 0px 0px;
+		}
+		@media (max-width: 450px) {
+			margin: 0px 30px 0px 0px;
+		}
+	}
+}
+
+.menu {
+	display: flex;
+	flex: 1 1 auto;
+	justify-content: flex-end;
+
+	&__list {
+		display: flex;
+		font-family: 'Raleway';
+		font-weight: 700;
+		font-size: 10px;
+		line-height: 120%; /* 12/10 */
+		letter-spacing: 0.14em;
+		color: #000000;
+		@media (max-width: 767px) {
+			padding: 40px 0px 0px 0px;
+			display: block;
+			font-size: 26px;
+			color: #EC5863;
+		}
+	}
+	li {
+		&:hover {
+			text-decoration: underline;
+		}
+		margin: 0px 40px 0px 0px;
+		@media (max-width: 950px) {
+			margin: 0px 25px 0px 0px;
+		}
+		@media (max-width: 767px) {
+			&:not(:last-child){
+				padding: 0px 0px 20px 0px;
+			}
+		}
+	}
+}
